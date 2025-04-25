@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confession Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            background-image: url(heartssBG.jpg);
+            background-size: 480px auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;  
+            border-radius: 15px; 
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            justify-content: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 15px;
+            color: white;
+        }
+        h1{
+            color: rgb(241, 238, 215);
+            font-size: 20mm;
+        }
+        .big {
+            font-size: 24px;
+            padding: 15px 30px;
+        }
+        .small {
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+        #lobby{
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            justify-content: center;
+        }
+        #lobbyImg{
+            width: 300px;
+            height: auto;
+        }
+        #lobby2{
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            justify-content: center;
+        }
+        #mainPage{
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            justify-content: center;
+        }
+        #mainImage{
+            width: 300px;
+            height: auto;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            justify-content: center;
+        }
+        #videoContainer {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        #confirmationPage{
+            margin-top: 100px;
+        }
+        #confirmationImage{
+            width: 350px;
+            height: auto;
+        }
+        #yesButton, #confirmYesButton{
+            background-color: rgb(32, 182, 32);
+        }
+        #noButton, #confirmNoButton{
+            background-color: rgb(236, 89, 89);
+        }
+        #noButton:hover{
+            transform: translateY
+        }
+        #nonoPage{
+            margin-top: 115px;
+        }
+        #nonoImg{
+            width: 300px;
+            height: auto;
+        }
+        #backButton, #E, #Q{
+            background-color: rgb(97, 97, 234)
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center buttons horizontally */
+        }
+        /* audio{
+            display: none;
+        } */
+    </style>
+</head>
+<body>
+    <audio id="glue" preload="auto" >
+        <source src="beabadoobee - Glue Song (Official Music Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="lobby">
+        <h1>𝑯𝒊𝒊𝒊𝒊!!!</h1>
+        <img id="lobbyImg" src="im-lazy-cute.gif">
+        <div class="button-container">
+            <button id="E" onclick="handleE()">  !  </button>
+        </div>
+    </div>
+
+    <div id="lobby2" style="display: none;">
+        <h1>𝑸𝒖𝒊𝒄𝒌 𝒒𝒖𝒆𝒔𝒕𝒊𝒐𝒏𝒏𝒏</h1>
+        <img id="lobbyImg2" src="peachCat.gif">
+        <div class="button-container">
+            <button id="Q" onclick="handleQ()">  ???  </button>
+        </div>
+
+    </div>
+
+    <div id="mainPage" style="display: none;">
+        <h1>𝒘𝒊𝒍𝒍 𝒀𝑶𝑼 𝒃𝒆 𝒎𝒊𝒏𝒆?</h1>
+        <img id="mainImage" src="catRose.jpg" alt="Main Image">
+        <div class="button-container"> <!-- Added class here -->
+            <button id="yesButton" onclick="handleYes()">Yes</button>
+            <button id="noButton" onclick="randomizePos()">No</button>
+        </div>
+    </div>
+
+    <div id="confirmationPage" style="display: none;">
+        <img id="confirmationImage" src="omniman.jpg" alt="Are You Sure?">
+        <div class="button-container"> <!-- Added class here -->
+            <button id="confirmYesButton" onclick="handleConfirmYes()">Yes</button> 
+            <button id="confirmNoButton" onclick="handleConfirmNo()">No</button>
+        </div>
+    </div>
+
+    <div id="nonoPage" style="display: none">
+        <img id="nonoImg" src="angryEmoji.gif" alt="angryEmoji">
+        <div class="button-container">
+            <button id="backButton" onclick="confirmBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- <div id="videoContainer">
+        <video id="video" width="320" height="240" controls>
+            <source src="your-video-url-here.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div> -->
+
+    <script>
+        let isConfirming = false;
+
+        document.getElementById('E').addEventListener('click', function() {
+            var audio = document.getElementById('glue');
+            audio.muted = false; // Unmute the audio
+            audio.play(); // Start playing the audio
+        });
+
+        let btn = document.querySelector("#noButton");
+        let position;
+        btn.addEventListener("mouseover", function () {
+            position? (position = 0) : (position = 150);
+            btn.style.transform = `translate(${ position}px, 0px)`;
+            btn.style.transition = "all 0.2s ease"; });
+        btn.addEventListener('mouseover', function() {
+            if (position === 150) { // Only move if the button is at 150px
+                btn.style.transform = `translate(${position - 300}px, 0px)`; // Move to the left
+            }else{
+                btn.style.transform = `translate(${position + 150}px, 0px)`;
+            }
+        });
+        
+        function handleE(){
+            if (!isConfirming) {
+                document.getElementById('lobby').style.display = 'none';
+                document.getElementById('lobby2').style.display = 'block';
+                isConfirming = true;
+            }
+        }
+
+        function handleQ(){
+            if (isConfirming) {
+                document.getElementById('lobby2').style.display = 'none';
+                document.getElementById('mainPage').style.display = 'block';
+                isConfirming = false;
+            }
+        }
+
+
+        function handleYes() {
+            if (!isConfirming) {
+                document.getElementById('mainPage').style.display = 'none';
+                document.getElementById('confirmationPage').style.display = 'block';
+                isConfirming = true;
+            }
+        }
+
+        function handleConfirmYes() {
+            // Redirect to the final page with images and video
+            window.location.href = "final.html"; // Create a separate HTML file for this
+        }
+
+        function handleConfirmNo() {
+            if (isConfirming) {
+                document.getElementById('confirmationPage').style.display = 'none';
+                document.getElementById('nonoPage').style.display = 'block';
+                isConfirming = false;
+            }
+        }
+
+        function confirmBack(){
+            if (!isConfirming) {
+                document.getElementById('nonoPage').style.display = 'none';
+                document.getElementById('confirmationPage').style.display = 'block';
+                isConfirming = true;
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>You're stuck with me</title>
+
+    <style>
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url(heartssBG.jpg);
+            background-size: 480px auto;
+            position: relative; /* Set position relative for absolute positioning of corners */
+            overflow: hidden; /* Prevent overflow of images */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        .wrapper {
+        height: 200px;
+        width: 300px;
+        background-color: #f08080;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        z-index: 0;
+        }
+
+        .lid {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-right: 150px solid transparent;
+        border-bottom: 100px solid transparent;
+        border-left: 150px solid transparent;
+        transform-origin: top;
+        transition: transform 0.25s linear;
+        }
+
+        /* Lid when closed */
+        .lid.one {
+        border-top: 100px solid #f08080;
+        transform: rotateX(0deg);
+        z-index: 3;
+        transition-delay: 0.75s;
+        }
+
+        /* Lid when opened */
+        .lid.two {
+        border-top: 100px solid rgb(236, 89, 89);
+        transform: rotateX(90deg);
+        z-index: 1;
+        transition-delay: 0.5s;
+        }
+
+        .envelope {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-top: 100px solid transparent;
+        border-right: 150px solid #f4978e;
+        border-bottom: 100px solid #f4978e;
+        border-left: 150px solid #f4978e;
+        z-index: 3;
+        }
+
+        .letter {
+        position: absolute;
+        top: 0;
+        width: 80%;
+        height: 80%;
+        background-color: white;
+        border-radius: 15px;
+        z-index: 2;
+        transition: 0.5s;
+        }
+
+        .letter p {
+        text-align: center;
+        font-size: 30px;
+        margin-top: 30px;
+        color: #3B4049;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .wrapper:hover .lid.one {
+            transform: rotateX(90deg);
+            transition-delay: 0s;
+        }
+
+        .wrapper:hover .lid.two {
+            transform: rotateX(180deg);
+            transition-delay: 0.25s;
+        }
+
+        .wrapper:hover .letter {
+        transform: translateY(-50px);
+        transition-delay: 0.5s;
+        }
+        #env{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #buttonE{
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            font-size: 20px;
+            background-color: #f08080;
+            color: white;
+            border-radius: 15px;
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1; /* Ensure this is above the corner images */
+            animation: grow 2s forwards; /* Animation to grow the container */
+            font-size: 0; /* Set font size to 0 to remove space between images */
+            margin-bottom: 150px;
+        }
+
+
+        @keyframes grow {
+            to {
+                transform: scale(1.4); /* Scale the container to 140% */
+            }
+        }
+
+
+        img {
+            width: 250px; /* Set final width for images */
+            height: auto;
+            border-radius: 15px;
+        }
+
+
+        .heart-gif {
+            width: 100px; /* Set a fixed width for the heart GIF */
+            height: auto;
+            margin: 0 20px; /* Space between images and GIF */
+        }
+
+
+        /* Positioning happyCat.gif in each corner */
+
+        .corner-cat {
+            position: absolute;
+            width: 100px; /* Set a fixed width for the corner images */
+            height: auto;
+            z-index: 0; /* Ensure these are below the main content */
+        }
+
+
+        .top-left {
+            top: 10px;
+            left: 10px;
+        }
+
+
+        .top-right {
+            top: 10px;
+            right: 10px;
+        }
+
+
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+
+
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        h2{
+            margin-bottom: 100px;
+            color: rgb(241, 238, 215);
+            font-size: xx-large;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <audio id="bad" preload="auto" >
+        <source src="wave to earth - bad (Official Lyric Video).mp3" type="audio/mpeg">
+    </audio>
+    <div id="env">
+        <div class="wrapper">
+            <div class="lid one"></div>
+            <div class="lid two"></div>
+            <div class="envelope"></div>
+            <div class="letter">
+                <p>𝑭𝒐𝒓 𝒚𝒐𝒖𝒖</p>
+                <p>💖💞</p>
+            </div>
+        </div>
+        <button id="buttonE" onclick="handleE()">Open</button>
+    </div>
+
+    <div id="finalize" style="display: none;">
+        <h2>𝑪𝒐𝒏𝒈𝒓𝒂𝒕𝒔! 𝒀𝒐𝒖'𝒓𝒆 𝒐𝒇𝒇𝒊𝒄𝒊𝒂𝒍𝒍𝒚 𝒔𝒕𝒖𝒄𝒌 𝒘𝒊𝒕𝒉 𝒎𝒆 𝒂𝒔 𝒎𝒚 𝒈𝒊𝒓𝒍𝒇𝒓𝒊𝒆𝒏𝒅!</h2>
+        <div class="image-container">
+
+            <img src="me.jpg" alt="First Image">
+
+            <img class="heart-gif" src="pinkHeart.gif" alt="Heart GIF">
+
+            <img src="her.jpg" alt="Second Image">
+
+        </div>
+
+
+        <img class="corner-cat top-left" src="happyCat.gif" alt="Happy Cat">
+
+        <img class="corner-cat top-right" src="happyCat.gif" alt="Happy Cat">
+
+        <img class="corner-cat bottom-left" src="happyCat.gif" alt="Happy Cat">
+
+        <img class="corner-cat bottom-right" src="happyCat.gif" alt="Happy Cat">
+    </div>
+
+
+
+    <script>
+        let isConfirming = false;
+
+        document.getElementById('buttonE').addEventListener('click', function() {
+            var audio = document.getElementById('bad');
+            audio.muted = false; // Unmute the audio
+            audio.play(); // Start playing the audio
+        });
+
+        function handleE() {
+            if (!isConfirming) {
+            document.getElementById('env').style.display = 'none'; // Access the first element
+            document.getElementById('finalize').style.display = 'block';
+            isConfirming = true;
+        }}
+    </script>
+
+
+
+</body>
+
+</html>
